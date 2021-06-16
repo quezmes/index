@@ -1,0 +1,95 @@
+<html>
+
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"> </script>
+    <script
+    src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <script>
+        function uuidv4() {
+            return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+        }
+        
+        function getGroupId(){
+            let groupId;
+                $.get("https://yourbot.azurewebsites.net/getgroupid", (data) => {
+                    console.log('data: ' + data);
+                    groupId = data;
+                });
+                console.log('group Id: '+ groupId);
+                return groupId;
+        }
+        let temp = [
+            {
+                "name": "Trek Fuel",
+                "imageURL": "https://sprint-rowery.pl/media/catalog/product/cache/eecd74defa3b5f8d0d4b60fa62f6a89b/t/r/trek_fuel_ex_8_01.jpg",
+                "filter1": [
+                    "Black",
+                    "white"
+                ]
+            },
+            {
+                "name": "Trek procaliber",
+                "imageURL": "https://assets.newatlas.com/dims4/default/e7ab94e/2147483647/strip/true/crop/1483x910+0+0/resize/1440x884!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Fb3%2Fe9%2F2c3bd29e4d989dc699972766d023%2Fscreen-shot-2021-03-05-at-11.26.15%20AM.png",
+                "filter1": [
+                    "Red",
+                    "Black"
+                ]
+            },
+            {
+                "name": "Yeti SB150",
+                "imageURL": "https://yeticycles.pl/wp-content/uploads/2019/09/2020_YetiCycles_SB150_Dark_Complete_Turq-Polska.jpg"
+            },
+            {
+                "name": "Kross Moon",
+                "imageURL": "https://a.allegroimg.com/s512/115117/4bf3bd184c47aa967baaf618cdce/NOWY-ROWER-KROSS-MOON-3-0-M-17-29-ROCZNIK-2020-Rozmiar-ramy-17-cali"
+            },
+            {
+                "name": "Ghost Kato X",
+                "imageURL": "https://lh3.googleusercontent.com/proxy/eGL8eLD1879uvBVLQPs2tRqmyY_q4Yw-YY1i1hEVbtbGnbLj2K4bmf0QOqYJMZ5pJcNv4Vrh2q1XQ_lemA2zWoDInaGdeM14n8MsJnFIrOEnweChwCaFaqvOj4E"
+            }
+            ,
+            {
+                "name": "Trek procaliber 2",
+                "imageURL": "https://assets.newatlas.com/dims4/default/e7ab94e/2147483647/strip/true/crop/1483x910+0+0/resize/1440x884!/quality/90/?url=http%3A%2F%2Fnewatlas-brightspot.s3.amazonaws.com%2Fb3%2Fe9%2F2c3bd29e4d989dc699972766d023%2Fscreen-shot-2021-03-05-at-11.26.15%20AM.png",
+                "filter1": [
+                    "Red",
+                    "yellow"
+                ]
+            }
+        ]; 
+        let listFrame = document.createElement('iframe');
+        let botFrame = document.createElement('iframe');
+
+
+        let groupId = btoa(uuidv4());
+        console.log('groupId: ' + groupId);
+
+        let json = btoa(JSON.stringify(temp));
+        appId = btoa("MyClientId2");
+
+        listFrame.setAttribute('src', 'https://yourbotwidget.azurewebsites.net/gallery'
+            + '?' + 'list=' + json
+            + '&' + 'appId=' + appId
+            + '&' + 'groupId=' + groupId);
+        listFrame.style = 'height: 700px; width: 1000px';
+        document.body.appendChild(listFrame);
+
+        botFrame.setAttribute('src', 'https://yourbotwidget.azurewebsites.net/bot'
+            + '?' + 'appId=' + appId
+            + '&' + 'groupId=' + groupId);
+        botFrame.style = 'height: 700px; width: 300px';
+        document.body.appendChild(botFrame);
+
+
+    </script>
+</body>
+
+</html>
